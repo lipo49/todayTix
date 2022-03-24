@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite thread-count="2" name="Test1" verbose="2" parallel="tests">
+
+<!--    Before running this suite, plz change driver in BaseTest to "SAVED_CHROME_PROFILE"-->
+    <test name="order" verbose="2" group-by-instances="true">
+        <groups>
+            <run>
+                <exclude name="ChromeAndFireFox"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="testCases.Tests" />
+        </classes>
+    </test>
+
+</suite>
+
