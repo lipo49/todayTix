@@ -8,6 +8,7 @@ import org.testng.annotations.*;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import utils.*;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,7 +21,7 @@ import java.util.Random;
 
 import static utils.AppStrings.URL;
 
-public class BaseTest  {
+public class BaseTest {
 
     public static String timeStamp = new SimpleDateFormat("dd-MM-yyy_HH-mm-ss").format(Calendar.getInstance().getTime());
     public static ExtentReports extent;
@@ -33,7 +34,7 @@ public class BaseTest  {
 
     // function that getting data from xml file
     public static String getData(String nodeName) throws ParserConfigurationException, IOException, SAXException {
-        File xmlFile = new File("params.xml");
+        File xmlFile = new File("reportConfig.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
@@ -44,6 +45,8 @@ public class BaseTest  {
     // report inits
     @BeforeSuite()
     public static void startSuite() throws Exception {
+        browser = new Browser(WebDriverFactory.init(BrowserType.CHROME)); // Change browser name to "FIREFOX" / "CHROME"
+
         path = getData("ReportFilePath") + "/" + timeStamp + "/" + "report" + ".html";
         htmlReporter = new ExtentHtmlReporter(path);
         extent = new ExtentReports();
@@ -60,7 +63,7 @@ public class BaseTest  {
     }
 
     @BeforeTest
-    public static void start() throws Exception {
+    public static void start() {
 
     }
 
@@ -73,7 +76,6 @@ public class BaseTest  {
     @BeforeMethod
     public void doBeforeTest(Method method) {
         try {
-            browser = new Browser(WebDriverFactory.init(BrowserType.CHROME));
             String testName = testNameChanging(method.getName());
             initReportTest(testName);
         } catch (Exception e) {
@@ -87,7 +89,6 @@ public class BaseTest  {
     public void doAfterTest() {
         try {
             extent.flush();
-            browser.getDriver().close();
         } catch (Exception e) {
             report.fail("Fail: " + e.getMessage());
             browser.fail("Fail: " + e.getMessage());

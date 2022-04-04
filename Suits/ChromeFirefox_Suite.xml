@@ -5,9 +5,6 @@
 <!--    Before running this suite, plz change driver in BaseTest to "CHROME" OR "FIREFOX"-->
     <test name="order" verbose="2" group-by-instances="true">
         <groups>
-            <run>
-                <exclude name="rememberMe"/>
-            </run>
         </groups>
         <classes>
             <class name="testCases.Tests" />

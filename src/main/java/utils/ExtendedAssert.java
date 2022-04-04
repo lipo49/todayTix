@@ -1,7 +1,7 @@
 package utils;
 
 
-import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 import org.xml.sax.SAXException;
 import testCases.BaseTest;
 import javax.xml.parsers.ParserConfigurationException;
@@ -10,47 +10,58 @@ import java.io.IOException;
 public class ExtendedAssert extends BaseTest {
 
     private Report report = new Report();
+    public SoftAssert softAssert = new SoftAssert();
 
 
-    // cover assert function for clear report system
-    public void assertTrue(boolean condition) throws ParserConfigurationException, SAXException, IOException, InterruptedException {
+
+    // Soft Asserts //
+    /////////////////
+
+    public void softAssertEquals(String expected, String actual) {
+        actual = actual.replace("\n", " ").replace("\r", " ");
+        expected = expected.replace("\n", " ").replace("\r", " ");
         try {
-            Assert.assertTrue(condition);
-            report.pass("Assertion pass");
+            softAssert.assertEquals(actual, expected);
         } catch (Exception e) {
-            report.fail("Test FAIL: " + e.getMessage());
-            report.screenShot();
-            browser.fail(e.getMessage());
-        } catch (AssertionError error) {
-            report.fail("Assert FAIL: " + error.getMessage());
-            report.screenShot();
-            browser.fail(error.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
-    // cover assert function for clear report system
-    public void assertStringEqual(String expected, String actual) throws InterruptedException, IOException, SAXException, ParserConfigurationException {
-
-        String expectedHTML = "<b style=\"margin: 0px 10px 0px 10px;color:blue;font-size:15px;text-decoration: underline;\">" + expected + "</b>";
-        String actualHTML = "<b style=\"margin: 0px 10px 0px 10px;color:blue;font-size:15px;text-decoration: underline;\">" + actual + "</b>";
-        report.info("Comparing strings Expected: " + expectedHTML + " Actual: " + actualHTML);
-        actual = actual.replace("\n", "").replace("\r", "");
-        expected = expected.replace("\n", "").replace("\r", "");
-
+    public void softAssertTrue(boolean condition)  {
+        String assertionPassed = "<b style=\"margin: 0px 10px 0px 10px;color:blue;font-size:15px;text-decoration: underline;\">" + "Assertion Passed!" + "</b>";
         try {
-            Assert.assertEquals(actual, expected);
-            report.pass("The text is correct with value: " + actualHTML);
-            report.screenShot();
+            softAssert.assertTrue(condition);
+            report.info(assertionPassed);
         } catch (Exception e) {
-            report.fail(e.getMessage());
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void softStringContain(String expected, String realOne, String realTwo)  {
+        expected = expected.toLowerCase();
+        realOne = realOne.toLowerCase();
+        realTwo = realTwo.toLowerCase();
+        try {
+            if ((realOne.toLowerCase().contains(expected) || (realTwo.toLowerCase().contains(expected)))) {
+                softAssertTrue(true);
+            }else {
+                softAssertTrue(false);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void softAssertAll() throws ParserConfigurationException, SAXException, IOException {
+        try {
+            softAssert.assertAll();
+        } catch (AssertionError e) {
+            softAssert = new SoftAssert();
+            report.fail("Test FAIL: " + e.getMessage());
             report.screenShot();
             browser.fail(e.getMessage());
-        } catch (AssertionError error) {
-            report.fail("Compare FAIL: " + error.getMessage());
-            System.out.println(error.getMessage());
-            report.screenShot();
-            browser.fail(error.getMessage());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -1,24 +1,19 @@
-1648141941578	geckodriver	INFO	Listening on 127.0.0.1:3553
-1648141942586	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/c6/gjkhhkwn5rs5b6n1gmk7mzhr0000gn/T/rust_mozprofile6BlK34"
-1648141943013	Marionette	INFO	Marionette enabled
-2022-03-24 17:12:23.649 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSButton: 0x1246d7800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.650 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSButton: 0x131e8d800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.650 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSButton: 0x131e8a400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.651 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSButton: 0x131e89c00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.651 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSButton: 0x131e8e000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.652 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x131e91000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-2022-03-24 17:12:23.652 firefox-bin[72273:6217865] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x13200b800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/c6/gjkhhkwn5rs5b6n1gmk7mzhr0000gn/T/rust_mozprofile6BlK34/search.json.mozlz4", (void 0)))
+1649098881964	geckodriver	INFO	Listening on 127.0.0.1:23934
+1649098883136	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "-foreground" "-no-remote" "-profile" "/var/folders/c6/gjkhhkwn5rs5b6n1gmk7mzhr0000gn/T/rust_mozprofileL5uvvt"
+1649098883708	Marionette	INFO	Marionette enabled
+2022-04-04 20:01:24.458 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSButton: 0x11da7a000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.459 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSButton: 0x128e0d800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.459 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSButton: 0x128e0d400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.460 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSButton: 0x128e0e800>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.460 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSButton: 0x128e10000>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.461 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x128e10400>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+2022-04-04 20:01:24.462 firefox-bin[60185:16518049] Warning: Expected min height of view: (<NSPopoverTouchBarItemButton: 0x12905cc00>) to be less than or equal to 30 but got a height of 32.000000. This error will be logged once per view in violation.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/c6/gjkhhkwn5rs5b6n1gmk7mzhr0000gn/T/rust_mozprofileL5uvvt/search.json.mozlz4", (void 0)))
 console.error: BackgroundUpdate: 
   _reasonsToNotScheduleUpdates: Failed to check for Maintenance Service Registry Key: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIUpdateProcessor.getServiceRegKeyExists]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/BackgroundUpdate.jsm :: _reasonsToNotScheduleUpdates :: line 241"  data: no]
-1648141944871	Marionette	INFO	Listening on port 50122
-1648141944967	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
-console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.hudl.com"
-console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.hudl.com"
-console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.hudl.com"
-console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.hudl.com"
-console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.hudl.com"
-1648141951876	Marionette	INFO	Stopped listening on port 50122
-
-###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
-
+1649098885559	Marionette	INFO	Listening on port 53243
+1649098885613	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://automationpractice.com"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://automationpractice.com"
+1649098979490	Marionette	INFO	Stopped listening on port 53243
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]

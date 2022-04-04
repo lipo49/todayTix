@@ -16,33 +16,31 @@ import java.io.IOException;
 // Extent reports class cover
 public class Report extends BaseTest {
 
-    public Report(){
+    public Report() {
     }
 
-    public void info(String description){
+    public void info(String description) {
         test.log(Status.INFO, description);
     }
 
-    public void pass(String description){
+    public void pass(String description) {
         test.log(Status.PASS, description);
     }
 
-    public void fail(String description){
+    public void fail(String description) {
         test.log(Status.FAIL, description);
     }
-    public void warning(String description){
-        test.log(Status.WARNING, description);
-    }
+
 
     public void screenShot() throws ParserConfigurationException, SAXException, IOException {
-        test.log(Status.INFO, "Screen shot attached: " );
+        test.log(Status.INFO, "Screen shot attached: ");
         test.addScreenCaptureFromPath(getScreenshot(browser.getDriver()));
     }
 
     public static String getScreenshot(WebDriver driver) throws IOException, ParserConfigurationException, SAXException {
 
         String fileName = "screenshot_" + getRandomNumber() + ".png";
-        String sSpath =  getData("ReportFilePath") + "/" + timeStamp + "/"  +  fileName;
+        String sSpath = getData("ReportFilePath") + "/" + timeStamp + "/" + fileName;
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
         String destination = sSpath;

@@ -1,4 +1,4 @@
-# Hudl Login Test suite
+# Global Home Task suite
 
 I used Selenium, TestNG, Maven & Java to run the tests.
 
