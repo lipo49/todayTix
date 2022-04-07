@@ -5,8 +5,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.HashMap;
+import java.util.Map;
 
-import static utils.AppStrings.URL;
 
 public class WebDriverFactory {
     private static WebDriver driver;
@@ -28,6 +29,15 @@ public class WebDriverFactory {
         System.setProperty("webdriver.chrome.driver","drivers/chromedriver");
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        options.addArguments("--disable-web-security");
+        options.addArguments("--disable-logging");
+        options.addArguments("--disable-extensions");
+
+        Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+
+        options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
         return driver;
     }

@@ -15,104 +15,41 @@ import static utils.AppStrings.*;
 public class Tests extends BaseTest {
 
     private HomePage homePage;
-    private ProductPage productPage;
-    private CartPage cartPage;
+    private ShowPage showPage;
+    private TicketsPage ticketsPage;
     private ExtendedAssert extendedAssert;
-
-    private String productIdFadedShortSleeve;
-    private String productIdEveningDress;
 
     // Init all pages and reports
     @BeforeMethod
     public void initPages() {
         homePage = new HomePage(browser);
-        productPage = new ProductPage(browser);
-        cartPage = new CartPage(browser);
+        showPage = new ShowPage(browser);
+        ticketsPage = new TicketsPage(browser);
         extendedAssert = new ExtendedAssert();
     }
 
-
-    // Add Faded Short Sleeve T-Shirt to the cart
+    // Perform Successful Login to for running the scenario
     @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_01_addFadedShortSleeveShirtToCart() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.enterSearchTextFieldValues(FADED_SHORT_SLEEVE_TSHIRT);
-        extendedAssert.softStringContain(FADED_SHORT_SLEEVE_TSHIRT, productPage.getProductTitle(), productPage.getProductDescriptions());
-        productPage.selectBlueColor();
-        productPage.sizeSelect(MEDIUM);
-        productPage.getProductPrice();
-        // Saving global value to use productIdFadedShortSleeve in test No.5
-        productIdFadedShortSleeve = productPage.getProductId();
-        productPage.clickAddToCartButton();
-        extendedAssert.softAssertEquals(productPage.getProductPriceInCard(), productPage.getProductPrice());
-        productPage.clickContinueShoppingButton();
+    public void test_01_scenarioTest() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
+        extendedAssert.softAssertTrue(homePage.performPositiveLogin()); // Asserts successful login process
+        homePage.getLocationLocator(LOCATION); // determine the location dynamically, which can be changed through LOCATION in utils.AppStrings
+        homePage.selectLocation(); // select the determined location
+        homePage.getShowLocatorInDropDown(SHOW_SEARCH); // determine show title
+        homePage.searchForAShow(); // search for that show and select it in AutoComplete accordingly
+        extendedAssert.softStringContain(SHOW_SEARCH,showPage.getShowTitle()); // Asserts initial show title on show page
+        showPage.clickGetTicketsButton(); // click Get Tickets button
+        extendedAssert.softAssertTrue(ticketsPage.ticketsPageIndication()); // Assert calendar on screen via calendar element
+        ticketsPage.clickCertainDateInCalendar(); // select certain date in calendar
+        extendedAssert.softAssertTrue(ticketsPage.showTimeFormDisplayed()); // Assert show time & price appears at the bottom
+        ticketsPage.clickShowPriceElement(); // click on time & price element
+        extendedAssert.softAssertTrue(ticketsPage.selectSectionElementAppear()); // Asserts select section appears on screen
+        ticketsPage.clickCertainSection(); // select certain section
+        extendedAssert.softAssertTrue(ticketsPage.creditCardsAppear()); // Asserts 2 payment methods appears on screen
+        ticketsPage.typePhoneNumber(); // select country code and type phone number
+        ticketsPage.typeNameAndEmail(); // type name & email
+        ticketsPage.clickCreditCard(); // click on Credit Card option
+        extendedAssert.softAssertTrue(ticketsPage.creditCardFormAppears()); // Assert that Credit Card fields displayed and ready to be filled
         extendedAssert.softAssertAll();
     }
 
-    // Add Evening Dress to the cart
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_02_addEveningDressToCart() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.enterSearchTextFieldValues(EVENING_DRESS);
-        extendedAssert.softStringContain(EVENING_DRESS, productPage.getProductTitle(), productPage.getProductDescriptions());
-        productPage.selectBeigeColor();
-        productPage.sizeSelect(SMALL);
-        productPage.getProductPrice();
-        // Saving global value to use productIdEveningDress in test No.4
-        productIdEveningDress = productPage.getProductId();
-        productPage.clickAddToCartButton();
-        extendedAssert.softAssertEquals(productPage.getProductPriceInCard(), productPage.getProductPrice());
-        productPage.clickContinueShoppingButton();
-        extendedAssert.softAssertAll();
-    }
-
-    // Add Printed Summer Dress to the cart
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_03_addPrintedSummerDressToCart() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.enterSearchTextFieldValues(PRINTED_SUMMER_DRESS);
-        extendedAssert.softStringContain(PRINTED_SUMMER_DRESS, productPage.getProductTitle(), productPage.getProductDescriptions());
-        extendedAssert.softAssertAll();
-        productPage.selectOrangeColor();
-        productPage.sizeSelect(MEDIUM);
-        productPage.getProductPrice();
-        productPage.clickAddToCartButton();
-        extendedAssert.softAssertEquals(productPage.getProductPriceInCard(), productPage.getProductPrice());
-        productPage.clickContinueShoppingButton();
-        extendedAssert.softAssertAll();
-    }
-
-    // Delete Evening Dress item from cart
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_04_deleteEveningDress() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.clickOnCart();
-        cartPage.deleteProductFromCart(productIdEveningDress);
-        extendedAssert.softAssertTrue(cartPage.productIdIsNotInDom(productIdEveningDress));
-        extendedAssert.softAssertAll();
-    }
-
-    // Add 1 item to Faded Short Sleeve T-Shirt
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_05_addQuantityForFadedShortSleeveTshirt() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.clickOnCart();
-        cartPage.addQuantityForProductId(productIdFadedShortSleeve);
-        extendedAssert.softAssertTrue(cartPage.verifyProductQuantityByProductId(productIdFadedShortSleeve, 2));
-        extendedAssert.softAssertAll();
-
-    }
-
-    // Verify total price for each item after quantity modification
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_06_verifyTotalPriceForEachLineInCart() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.clickOnCart();
-        extendedAssert.softAssertTrue(cartPage.compareProductTotals());
-        extendedAssert.softAssertAll();
-
-    }
-
-    // Test fails coz $65.53 is not including the discount of 5% for Printed Summer Dance
-    @Test(retryAnalyzer = Retry.class, groups = "ChromeAndFireFox")
-    public void test_07_verifyCartTotalPrice() throws IOException, ParserConfigurationException, InterruptedException, SAXException {
-        homePage.clickOnCart();
-        extendedAssert.softAssertEquals(cartPage.validateCartTotal(), "65.53");
-        extendedAssert.softAssertAll();
-
-    }
 }

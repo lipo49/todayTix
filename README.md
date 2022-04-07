@@ -1,4 +1,4 @@
-# Global Home Task suite
+# TodayTix Home Task suite
 
 I used Selenium, TestNG, Maven & Java to run the tests.
 

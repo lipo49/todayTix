@@ -14,19 +14,6 @@ public class ExtendedAssert extends BaseTest {
 
 
 
-    // Soft Asserts //
-    /////////////////
-
-    public void softAssertEquals(String expected, String actual) {
-        actual = actual.replace("\n", " ").replace("\r", " ");
-        expected = expected.replace("\n", " ").replace("\r", " ");
-        try {
-            softAssert.assertEquals(actual, expected);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void softAssertTrue(boolean condition)  {
         String assertionPassed = "<b style=\"margin: 0px 10px 0px 10px;color:blue;font-size:15px;text-decoration: underline;\">" + "Assertion Passed!" + "</b>";
         try {
@@ -37,12 +24,11 @@ public class ExtendedAssert extends BaseTest {
         }
     }
 
-    public void softStringContain(String expected, String realOne, String realTwo)  {
+    public void softStringContain(String expected, String actual)  {
         expected = expected.toLowerCase();
-        realOne = realOne.toLowerCase();
-        realTwo = realTwo.toLowerCase();
+        actual = actual.toLowerCase();
         try {
-            if ((realOne.toLowerCase().contains(expected) || (realTwo.toLowerCase().contains(expected)))) {
+            if ((actual.toLowerCase().contains(expected))) {
                 softAssertTrue(true);
             }else {
                 softAssertTrue(false);

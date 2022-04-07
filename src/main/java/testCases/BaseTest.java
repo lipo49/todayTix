@@ -21,6 +21,7 @@ import java.util.Random;
 
 import static utils.AppStrings.URL;
 
+
 public class BaseTest {
 
     public static String timeStamp = new SimpleDateFormat("dd-MM-yyy_HH-mm-ss").format(Calendar.getInstance().getTime());

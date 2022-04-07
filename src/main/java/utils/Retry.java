@@ -8,7 +8,7 @@ import testCases.BaseTest;
 public class Retry extends BaseTest implements IRetryAnalyzer
 {
     int counter = 0;
-    int retryLimit = 0; // this Int represents the number of retries every test will do until it fails
+    int retryLimit = 3; // this Int represents the number of retries every test will do until it fails
 
     @Override
     public boolean retry(ITestResult iTestResult) {
